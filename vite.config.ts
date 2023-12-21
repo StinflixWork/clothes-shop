@@ -10,7 +10,8 @@ export default defineConfig({
 			pages: '/src/pages',
 			slices: '/src/store/slices',
 			utils: '/src/utils',
-			views: '/src/views'
+			views: '/src/views',
+			images: '/src/assets/img'
 		}
 	}
 })

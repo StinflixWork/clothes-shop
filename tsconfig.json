@@ -16,6 +16,9 @@
       ],
       "views/*": [
         "views/*"
+      ],
+      "images/*": [
+        "assets/img/*"
       ]
     },
     "target": "ES2020",

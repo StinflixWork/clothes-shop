@@ -1,5 +1,7 @@
+import { Catalog } from 'views/catalog/Catalog.tsx'
+
 const CatalogPage = () => {
-	return <div>Catalog Page</div>
+	return <Catalog />
 }
 
 export default CatalogPage
