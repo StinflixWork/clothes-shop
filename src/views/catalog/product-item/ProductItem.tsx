@@ -1,11 +1,11 @@
-import { TypeCatalog } from 'slices/catalogSlice.ts'
 import { NavLink } from 'react-router-dom'
+import { IProduct } from 'interfaces/index.ts'
 
-type TypeProductItem = {
-	product: TypeCatalog
+interface IProductItem {
+	product: IProduct
 }
 
-export const ProductItem = ({ product }: TypeProductItem) => {
+export const ProductItem = ({ product }: IProductItem) => {
 	return (
 		<div className='w-[275px] max-h-[470px]'>
 			<div className='w-full h-[400px]'>

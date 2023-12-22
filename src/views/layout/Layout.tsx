@@ -6,7 +6,7 @@ interface ILayout {
 	children: ReactNode
 }
 
-const Layout = ({ children }: ILayout) => {
+export const Layout = ({ children }: ILayout) => {
 	return (
 		<div className='min-h-full flex flex-col overflow-clip'>
 			<Header />
@@ -15,5 +15,3 @@ const Layout = ({ children }: ILayout) => {
 		</div>
 	)
 }
-
-export default Layout

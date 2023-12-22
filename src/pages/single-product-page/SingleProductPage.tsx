@@ -1,9 +1,10 @@
-import { useSelector } from 'react-redux'
-import { selectByIdProduct } from '../../store/selectors.ts'
+import { useParams } from 'react-router-dom'
 import Container from 'components/container/Container.tsx'
+import { useFilterByIdProduct } from 'hooks/useFilterProductById.ts'
 
 export const SingleProductPage = () => {
-	const [product] = useSelector(selectByIdProduct)
+	const params = useParams()
+	const [product] = useFilterByIdProduct(params.idProduct)
 
 	return (
 		<section className='py-10'>

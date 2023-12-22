@@ -19,6 +19,12 @@
       ],
       "images/*": [
         "assets/img/*"
+      ],
+      "interfaces/*": [
+        "interfaces/*"
+      ],
+      "hooks/*": [
+        "hooks/*"
       ]
     },
     "target": "ES2020",

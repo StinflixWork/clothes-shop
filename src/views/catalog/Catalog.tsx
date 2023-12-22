@@ -11,7 +11,9 @@ export const Catalog = () => {
 
 	return (
 		<section className='py-10'>
-			<Container>{products}</Container>
+			<Container>
+				<div className='flex gap-x-10 flex-wrap'>{products}</div>
+			</Container>
 		</section>
 	)
 }
