@@ -18,17 +18,12 @@ export const selectByIdProduct = createSelector(
 export const selectByFilterProduct = createSelector(
 	[selectAllProducts, selectActiveFilter],
 	(catalog, activeFilter) => {
-		switch (activeFilter) {
-			case FILTERS.ALL:
-				return catalog
-			case FILTERS.JEANS:
-				return catalog.filter(product => product.category === FILTERS.JEANS)
-			case FILTERS.PANTS:
-				return catalog.filter(product => product.category === FILTERS.PANTS)
-			case FILTERS.NEW:
-				return catalog.slice().reverse()
-			default:
-				return catalog
+		if (FILTERS.NEW === activeFilter) {
+			return catalog.slice().reverse()
+		} else if (Object.values(FILTERS).indexOf(activeFilter)) {
+			return catalog.filter(product => product.category === activeFilter)
+		} else {
+			return catalog
 		}
 	}
 )
