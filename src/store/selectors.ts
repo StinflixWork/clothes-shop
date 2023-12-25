@@ -1,6 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from './store.ts'
-import { FILTERS } from 'slices/filterSlice.ts'
 
 export const selectAllProducts = ({ catalog }: RootState) => catalog.products
 export const selectIdFilterProduct = ({ catalog }: RootState) =>
@@ -8,6 +7,7 @@ export const selectIdFilterProduct = ({ catalog }: RootState) =>
 
 export const selectActiveFilter = ({ filters }: RootState) => filters
 
+// вибірка по ID товару
 export const selectByIdProduct = createSelector(
 	[selectAllProducts, selectIdFilterProduct],
 	(catalog, idProduct) => {
@@ -15,15 +15,14 @@ export const selectByIdProduct = createSelector(
 	}
 )
 
-export const selectByFilterProduct = createSelector(
+// Вибірка по категоріям
+export const selectByCategoriesProduct = createSelector(
 	[selectAllProducts, selectActiveFilter],
-	(catalog, activeFilter) => {
-		if (FILTERS.NEW === activeFilter) {
-			return catalog.slice().reverse()
-		} else if (Object.values(FILTERS).indexOf(activeFilter)) {
-			return catalog.filter(product => product.category === activeFilter)
+	(products, categories) => {
+		if (!categories.length) {
+			return products
 		} else {
-			return catalog
+			return products.filter(product => categories.includes(product.category))
 		}
 	}
 )

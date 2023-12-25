@@ -1,15 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export enum FILTERS {
-	ALL = 'all',
-	NEW = 'new',
-	JEANS = 'jeans',
-	PANTS = 'pants'
-}
+const initialFilters: string[] = []
 
 const filterSlice = createSlice({
 	name: 'filters',
-	initialState: FILTERS.ALL,
+	initialState: initialFilters,
 	reducers: {
 		changeFilter: (_, action) => action.payload
 	}
