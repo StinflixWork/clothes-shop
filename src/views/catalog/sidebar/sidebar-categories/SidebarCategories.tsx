@@ -3,15 +3,15 @@ import { MyCheckbox } from 'components/inputs/checkbox/MyCheckbox.tsx'
 import { toCapitalizeCase } from 'utils/toCapitalizeCase.ts'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch } from 'hooks/storeHooks.ts'
-import { changeFilter } from 'slices/filterSlice.ts'
+import { useSelector } from 'react-redux'
+import { setFilters } from 'slices/catalogSlice.ts'
 
 export const SidebarCategories = () => {
-	const [isCheckedCategories, setIsCheckedCategories] = useState<string[]>([])
+	const filters = useSelector(({ catalog }) => catalog.filters)
 	const dispatch = useAppDispatch()
-
-	useEffect(() => {
-		dispatch(changeFilter(isCheckedCategories))
-	}, [isCheckedCategories])
+	const [isCheckedCategories, setIsCheckedCategories] = useState<string[]>(
+		filters.category
+	)
 
 	function handleCheckedCategory(e: React.ChangeEvent<HTMLInputElement>) {
 		const { value, checked } = e.target
@@ -24,6 +24,11 @@ export const SidebarCategories = () => {
 			)
 		}
 	}
+
+	useEffect(() => {
+		dispatch(setFilters({ ...filters, category: isCheckedCategories }))
+	}, [isCheckedCategories])
+
 	return (
 		<div>
 			<h2 className='text-2xl mb-5'>Categories</h2>

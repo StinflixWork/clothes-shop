@@ -12,4 +12,4 @@ type TypeImage = {
 	alt: string
 }
 
-type TypeCategoryProduct = 'jeans' | 'pants' | 'shorts'
+type TypeCategoryProduct = 'jeans' | 'pants'

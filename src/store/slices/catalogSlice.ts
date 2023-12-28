@@ -1,51 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit'
-import CargoJeans from 'images/catalog/pants/jeans_cargo_1.jpeg'
-import CargoJPants from 'images/catalog/pants/pants_cargo_1.jpeg'
+import { data } from '../../data/data.ts'
 import { IProduct } from 'interfaces/index.ts'
+
+type TypeFilters = {
+	search: string
+	category: string[]
+	sort: 'expensive' | 'cheaper' | 'new' | 'default'
+}
 
 type TypeCatalog = {
 	products: IProduct[]
-	idFilterProduct: number
+	filters: TypeFilters
 }
 
-// temp fake data
 const initialCatalog: TypeCatalog = {
-	products: [
-		{
-			id: 1,
-			title: 'The jeans Cargo black slim',
-			price: 1130,
-			img: {
-				alt: 'jeans',
-				src: CargoJeans
-			},
-			isFavorite: false,
-			category: 'jeans'
-		},
-		{
-			id: 2,
-			title: 'The pants Staff du cargo blue',
-			price: 1230,
-			img: {
-				alt: 'pants',
-				src: CargoJPants
-			},
-			isFavorite: false,
-			category: 'pants'
-		}
-	],
-	idFilterProduct: 1
+	products: data,
+	filters: {
+		search: '',
+		category: [],
+		sort: 'default'
+	}
 }
 
 export const catalogSlice = createSlice({
 	name: 'catalog',
 	initialState: initialCatalog,
 	reducers: {
-		setIdFilterProduct: (state, action: { payload: number }) => {
-			state.idFilterProduct = action.payload
+		setFilters: (state, action) => {
+			state.filters = action.payload
 		}
 	}
 })
 
-export const { setIdFilterProduct } = catalogSlice.actions
+export const { setFilters } = catalogSlice.actions
 export default catalogSlice.reducer
