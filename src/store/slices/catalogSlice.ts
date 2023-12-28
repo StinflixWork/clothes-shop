@@ -11,6 +11,7 @@ type TypeFilters = {
 type TypeCatalog = {
 	products: IProduct[]
 	filters: TypeFilters
+	product: IProduct[]
 }
 
 const initialCatalog: TypeCatalog = {
@@ -19,7 +20,8 @@ const initialCatalog: TypeCatalog = {
 		search: '',
 		category: [],
 		sort: 'default'
-	}
+	},
+	product: []
 }
 
 export const catalogSlice = createSlice({
@@ -28,9 +30,13 @@ export const catalogSlice = createSlice({
 	reducers: {
 		setFilters: (state, action) => {
 			state.filters = action.payload
+		},
+		filterIdProduct: (state, action) => {
+			const id = parseInt(action.payload)
+			state.product = state.products.filter(product => product.id === id)
 		}
 	}
 })
 
-export const { setFilters } = catalogSlice.actions
+export const { setFilters, filterIdProduct } = catalogSlice.actions
 export default catalogSlice.reducer
