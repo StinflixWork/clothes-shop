@@ -6,6 +6,7 @@ type TypeFilters = {
 	search: string
 	category: string[]
 	sort: 'expensive' | 'cheaper' | 'new' | 'default'
+	rangePrice: number[]
 }
 
 type TypeCatalog = {
@@ -19,7 +20,8 @@ const initialCatalog: TypeCatalog = {
 	filters: {
 		search: '',
 		category: [],
-		sort: 'default'
+		sort: 'default',
+		rangePrice: [0, 2000]
 	},
 	product: []
 }

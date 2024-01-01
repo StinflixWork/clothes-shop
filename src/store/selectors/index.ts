@@ -9,7 +9,7 @@ export const selectFilteredProducts = createSelector(
 	[selectAllProducts, selectFilters],
 	(products, filters) => {
 		return products
-			.filter((product: { category: string; title: string }) => {
+			.filter((product: { category: string; title: string; price: number }) => {
 				return (
 					product.title.toLowerCase().indexOf(filters.search.toLowerCase()) >
 						-1 &&
@@ -18,6 +18,11 @@ export const selectFilteredProducts = createSelector(
 						: true)
 				)
 			})
+			.filter(
+				product =>
+					product.price > filters.rangePrice[0] &&
+					product.price < filters.rangePrice[1]
+			)
 			.sort((a: IProduct, b: IProduct) => {
 				if (filters.sort === 'expensive') {
 					return a.price < b.price ? 1 : -1
