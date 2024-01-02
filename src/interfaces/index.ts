@@ -5,6 +5,7 @@ export interface IProduct {
 	img: TypeImage
 	isFavorite: boolean
 	category: TypeCategoryProduct
+	size: TypeSizeProduct[]
 }
 
 type TypeImage = {
@@ -13,3 +14,5 @@ type TypeImage = {
 }
 
 type TypeCategoryProduct = 'jeans' | 'pants'
+
+type TypeSizeProduct = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'

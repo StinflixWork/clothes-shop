@@ -12,7 +12,7 @@ type TypeFilters = {
 type TypeCatalog = {
 	products: IProduct[]
 	filters: TypeFilters
-	product: IProduct[]
+	favorites: IProduct[]
 }
 
 const initialCatalog: TypeCatalog = {
@@ -23,7 +23,7 @@ const initialCatalog: TypeCatalog = {
 		sort: 'default',
 		rangePrice: [0, 2000]
 	},
-	product: []
+	favorites: []
 }
 
 export const catalogSlice = createSlice({
@@ -33,12 +33,27 @@ export const catalogSlice = createSlice({
 		setFilters: (state, action) => {
 			state.filters = action.payload
 		},
-		filterIdProduct: (state, action) => {
-			const id = parseInt(action.payload)
-			state.product = state.products.filter(product => product.id === id)
+		toggleIsFavorite: (state, { payload }) => {
+			const products = state.products.slice()
+			products.forEach(p => {
+				if (p.id === payload) {
+					p.isFavorite = !p.isFavorite
+				}
+			})
+
+			state.products = products
+
+			if (state.favorites.findIndex(p => p.id === payload) === -1) {
+				const [foundProduct]: IProduct[] = state.products.filter(
+					p => p.id === payload
+				)
+				state.favorites.push(foundProduct)
+			} else {
+				state.favorites = state.favorites.filter(p => p.id !== payload)
+			}
 		}
 	}
 })
 
-export const { setFilters, filterIdProduct } = catalogSlice.actions
+export const { setFilters, toggleIsFavorite } = catalogSlice.actions
 export default catalogSlice.reducer

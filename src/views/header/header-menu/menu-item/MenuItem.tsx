@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
+import { ReactNode } from 'react'
 
 type TypeMenu = {
-	title: string
+	title: string | ReactNode
 	path: string
 }
 

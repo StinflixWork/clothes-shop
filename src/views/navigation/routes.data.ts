@@ -3,6 +3,7 @@ import CatalogPage from 'pages/catalog-page/CatalogPage.tsx'
 import CartPage from 'pages/cart-page/CartPage.tsx'
 import { ReactNode } from 'react'
 import { SingleProductPage } from 'pages/single-product-page/SingleProductPage.tsx'
+import { FavoritesPage } from 'pages/favorites-page/FavoritesPage.tsx'
 
 type TypeRoutes = {
 	path: string
@@ -21,6 +22,10 @@ export const routesData: TypeRoutes[] = [
 	{
 		path: '/cart',
 		element: CartPage
+	},
+	{
+		path: '/favorites',
+		element: FavoritesPage
 	},
 	{
 		path: '/catalog/product/:idProduct',

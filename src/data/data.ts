@@ -16,7 +16,8 @@ export const data: IProduct[] = [
 			src: CargoJeans
 		},
 		isFavorite: false,
-		category: 'jeans'
+		category: 'jeans',
+		size: ['XS', 'S', 'M', 'L', 'XL']
 	},
 	{
 		id: 2,
@@ -27,7 +28,8 @@ export const data: IProduct[] = [
 			src: CargoPants
 		},
 		isFavorite: false,
-		category: 'pants'
+		category: 'pants',
+		size: ['XS', 'S', 'M']
 	},
 	{
 		id: 3,
@@ -38,7 +40,8 @@ export const data: IProduct[] = [
 			src: CargoPants2
 		},
 		isFavorite: false,
-		category: 'pants'
+		category: 'pants',
+		size: ['XS', 'S']
 	},
 	{
 		id: 4,
@@ -49,7 +52,8 @@ export const data: IProduct[] = [
 			src: CargoPants3
 		},
 		isFavorite: false,
-		category: 'pants'
+		category: 'pants',
+		size: ['XS', 'S']
 	},
 	{
 		id: 5,
@@ -60,6 +64,7 @@ export const data: IProduct[] = [
 			src: CargoJeans2
 		},
 		isFavorite: false,
-		category: 'jeans'
+		category: 'jeans',
+		size: ['XS', 'S']
 	}
 ]
