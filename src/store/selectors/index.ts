@@ -1,6 +1,5 @@
 import { RootState } from '../store.ts'
 import { createSelector } from '@reduxjs/toolkit'
-import { IProduct } from 'interfaces/index.ts'
 
 const selectAllProducts = ({ catalog }: RootState) => catalog.products
 const selectFilters = ({ catalog }: RootState) => catalog.filters
@@ -8,31 +7,35 @@ const selectFilters = ({ catalog }: RootState) => catalog.filters
 export const selectFilteredProducts = createSelector(
 	[selectAllProducts, selectFilters],
 	(products, filters) => {
-		return products
-			.filter((product: { category: string; title: string; price: number }) => {
-				return (
-					product.title.toLowerCase().indexOf(filters.search.toLowerCase()) >
-						-1 &&
-					(filters.category.length > 0
-						? filters.category.includes(product.category)
-						: true)
-				)
+		const { search, category, rangePrice, sort } = filters
+
+		const filteredProducts = products
+			.filter(product => {
+				const isTitleMatch = product.title
+					.toLowerCase()
+					.includes(search.toLowerCase())
+				const isCategoryMatch =
+					category.length === 0 || category.includes(product.category)
+				return isTitleMatch && isCategoryMatch
 			})
 			.filter(
 				product =>
-					product.price > filters.rangePrice[0] &&
-					product.price < filters.rangePrice[1]
+					product.price > rangePrice[0] && product.price < rangePrice[1]
 			)
-			.sort((a: IProduct, b: IProduct) => {
-				if (filters.sort === 'expensive') {
-					return a.price < b.price ? 1 : -1
-				} else if (filters.sort === 'cheaper') {
-					return a.price > b.price ? 1 : -1
-				} else if (filters.sort === 'new') {
-					return a.id < b.id ? 1 : -1
-				} else {
-					return a.id > b.id ? 1 : -1
-				}
-			})
+
+		const sortedProducts = filteredProducts.sort((a, b) => {
+			switch (sort) {
+				case 'expensive':
+					return a.price - b.price
+				case 'cheaper':
+					return b.price - a.price
+				case 'new':
+					return b.id - a.id
+				default:
+					return a.id - b.id
+			}
+		})
+
+		return sortedProducts
 	}
 )

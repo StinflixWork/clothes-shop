@@ -52,8 +52,6 @@ export const catalogSlice = createSlice({
 						...state.favorites,
 						...updatedProducts.filter(product => product.id === payload)
 					]
-
-			//localStorage.setItem('favorites', JSON.stringify(state.favorites));
 		}
 	}
 })
