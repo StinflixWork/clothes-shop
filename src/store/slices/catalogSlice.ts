@@ -34,23 +34,26 @@ export const catalogSlice = createSlice({
 			state.filters = action.payload
 		},
 		toggleIsFavorite: (state, { payload }) => {
-			const products = state.products.slice()
-			products.forEach(p => {
-				if (p.id === payload) {
-					p.isFavorite = !p.isFavorite
-				}
-			})
+			const updatedProducts = state.products.map(product =>
+				product.id === payload
+					? { ...product, isFavorite: !product.isFavorite }
+					: product
+			)
 
-			state.products = products
+			state.products = updatedProducts
 
-			if (state.favorites.findIndex(p => p.id === payload) === -1) {
-				const [foundProduct]: IProduct[] = state.products.filter(
-					p => p.id === payload
-				)
-				state.favorites.push(foundProduct)
-			} else {
-				state.favorites = state.favorites.filter(p => p.id !== payload)
-			}
+			const isProductInFavorites = state.favorites.some(
+				product => product.id === payload
+			)
+
+			state.favorites = isProductInFavorites
+				? state.favorites.filter(product => product.id !== payload)
+				: [
+						...state.favorites,
+						...updatedProducts.filter(product => product.id === payload)
+					]
+
+			//localStorage.setItem('favorites', JSON.stringify(state.favorites));
 		}
 	}
 })

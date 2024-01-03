@@ -1,7 +1,7 @@
 import Container from 'components/container/Container.tsx'
 import { IProduct } from 'interfaces/index'
-import { useSelector } from 'react-redux'
 import { ProductItem } from 'views/catalog/product-item/ProductItem.tsx'
+import { useSelector } from 'react-redux'
 
 export const Favorites = () => {
 	const favoritesData = useSelector(({ catalog }) => catalog.favorites)
