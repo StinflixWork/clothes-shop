@@ -1,10 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { IProduct } from 'interfaces/index.ts'
-
-type TypeOrder = {
-	product: IProduct
-	selectSize: string
-}
+import { TypeOrder } from 'types/index..ts'
 
 interface IProductCart {
 	purchase: TypeOrder

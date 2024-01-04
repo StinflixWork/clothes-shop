@@ -1,13 +1,12 @@
+import { useSelector } from 'react-redux'
+import { IProduct } from 'interfaces/index.ts'
+import { selectFilteredProducts } from '../../store/selectors'
 import Container from 'components/container/Container.tsx'
 import { CatalogSidebar } from 'views/catalog/sidebar/CatalogSidebar.tsx'
 import { SortProducts } from 'views/catalog/sort-products/SortProducts.tsx'
-import { useSelector } from 'react-redux'
 import { ProductItem } from 'views/catalog/product-item/ProductItem.tsx'
-import { IProduct } from 'interfaces/index.ts'
-import { FC } from 'react'
-import { selectFilteredProducts } from '../../store/selectors'
 
-export const Catalog: FC = () => {
+export const Catalog = () => {
 	const productsData = useSelector(selectFilteredProducts)
 	const items = productsData.map((product: IProduct) => (
 		<ProductItem key={product.id} product={product} />

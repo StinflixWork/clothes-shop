@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom'
-import { useAppDispatch } from 'hooks/storeHooks.ts'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useAppDispatch } from 'hooks/storeHooks.ts'
 import { toggleIsFavorite } from 'slices/catalogSlice.ts'
-import Container from 'components/container/Container.tsx'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { addToCart } from 'slices/cartSlice.ts'
 import { RootState } from '../../store/store.ts'
-import { useState } from 'react'
+import Container from 'components/container/Container.tsx'
+import { SingleProductBody } from 'views/single-product/single-product-body/SingleProductBody.tsx'
+import { SingleProductActions } from 'views/single-product/single-product-actions/SingleProductActions.tsx'
 
 export const SingleProduct = () => {
 	const params = useParams()
@@ -23,15 +24,6 @@ export const SingleProduct = () => {
 	function handleAddFavorite() {
 		dispatch(toggleIsFavorite(product.id))
 	}
-	function handleAddToCart() {
-		const selectedSize: string = product.size[isSelectSize.indexOf(true)] || ''
-		const myPurchase = {
-			product: { ...product },
-			selectSize: selectedSize
-		}
-
-		dispatch(addToCart(myPurchase))
-	}
 
 	function handleClickSize(index: number) {
 		setIsSelectSize(prevState => {
@@ -45,6 +37,21 @@ export const SingleProduct = () => {
 		})
 	}
 
+	function handleAddToCart() {
+		if (isSelectSize.indexOf(true)) {
+			alert('Select the size')
+			return
+		}
+
+		const selectedSize: string = product.size[isSelectSize.indexOf(true)] || ''
+		const myPurchase = {
+			product: { ...product },
+			selectSize: selectedSize
+		}
+
+		dispatch(addToCart(myPurchase))
+	}
+
 	return (
 		<section className='py-10'>
 			<Container>
@@ -54,37 +61,16 @@ export const SingleProduct = () => {
 							<img src={product.img.src} alt={product.img.alt} />
 						</div>
 						<div className='flex-auto flex-col py-5'>
-							<div className='mb-5'>
-								<h2 className='text-2xl font-semibold mb-3'>{product.title}</h2>
-								<p className='text-xl mb-3'>{product.price} UAH</p>
-								<div className='flex gap-x-5 items-center'>
-									{product.size.map((s, index) => (
-										<button
-											key={index}
-											className={`border border-solid border-gray-600 w-10 h-10 grid place-items-center hover:bg-gray-300 
-											${isSelectSize[index] ? 'bg-gray-300' : ''}`}
-											onClick={() => handleClickSize(index)}
-										>
-											{s}
-										</button>
-									))}
-								</div>
-							</div>
-							<div className='flex items-center gap-x-4'>
-								<button
-									className='bg-amber-400 py-2 px-8 font-semibold hover:bg-red-500 hover:text-white'
-									onClick={handleAddToCart}
-								>
-									Buy
-								</button>
-								<button onClick={handleAddFavorite}>
-									{product.isFavorite ? (
-										<FaHeart size={28} />
-									) : (
-										<FaRegHeart size={28} />
-									)}
-								</button>
-							</div>
+							<SingleProductBody
+								product={product}
+								isSelectSize={isSelectSize}
+								handleClickSize={handleClickSize}
+							/>
+							<SingleProductActions
+								isFavorite={product.isFavorite}
+								handleAddToCart={handleAddToCart}
+								handleAddFavorite={handleAddFavorite}
+							/>
 						</div>
 					</div>
 				)}

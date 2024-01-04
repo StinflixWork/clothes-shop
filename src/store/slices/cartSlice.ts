@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IProduct } from 'interfaces/index.ts'
-
-type TypeOrder = {
-	product: IProduct
-	selectSize: string
-}
+import { TypeOrder } from 'types/index..ts'
 
 type TypeInitialCart = {
 	purchases: TypeOrder[]
@@ -23,7 +18,7 @@ const cartSlice = createSlice({
 			)
 
 			state.purchases = isProductInCart
-				? state.purchases.filter(product => product.product.id !== payload)
+				? state.purchases.filter(purchase => purchase.product.id !== payload)
 				: [...state.purchases, payload]
 		}
 	}

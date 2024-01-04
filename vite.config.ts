@@ -12,6 +12,7 @@ export default defineConfig({
 			views: '/src/views',
 			images: '/src/assets/img',
 			interfaces: '/src/interfaces',
+			types: '/src/types',
 			hooks: '/src/hooks'
 		}
 	}

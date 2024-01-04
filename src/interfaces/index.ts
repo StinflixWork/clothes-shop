@@ -16,3 +16,7 @@ type TypeImage = {
 type TypeCategoryProduct = 'jeans' | 'pants'
 
 type TypeSizeProduct = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
+
+export interface IPropsProduct {
+	product: IProduct
+}

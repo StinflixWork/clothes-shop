@@ -30,8 +30,8 @@ export const catalogSlice = createSlice({
 	name: 'catalog',
 	initialState: initialCatalog,
 	reducers: {
-		setFilters: (state, action) => {
-			state.filters = action.payload
+		setFilters: (state, { payload }) => {
+			state.filters = payload
 		},
 		toggleIsFavorite: (state, { payload }) => {
 			const updatedProducts = state.products.map(product =>
