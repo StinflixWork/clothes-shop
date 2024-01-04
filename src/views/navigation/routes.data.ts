@@ -1,7 +1,7 @@
-import HomePage from 'pages/home-page/HomePage.tsx'
-import CatalogPage from 'pages/catalog-page/CatalogPage.tsx'
-import CartPage from 'pages/cart-page/CartPage.tsx'
 import { ReactNode } from 'react'
+import { HomePage } from 'pages/home-page/HomePage.tsx'
+import { CatalogPage } from 'pages/catalog-page/CatalogPage.tsx'
+import { CartPage } from 'pages/cart-page/CartPage.tsx'
 import { SingleProductPage } from 'pages/single-product-page/SingleProductPage.tsx'
 import { FavoritesPage } from 'pages/favorites-page/FavoritesPage.tsx'
 

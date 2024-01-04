@@ -1,5 +1,5 @@
-const CartPage = () => {
-	return <div>Cart Page</div>
-}
+import { Cart } from 'views/cart/Cart.tsx'
 
-export default CartPage
+export const CartPage = () => {
+	return <Cart />
+}
